@@ -2,12 +2,16 @@
 document.querySelectorAll(".set .drum").forEach(drum => {
  drum.addEventListener("click", function() {
 
-   playSound(this.textContent.toLowerCase());
+   var key = this.textContent.toLowerCase();
+   playSound(key);
+   buttonAnimation(key);
  });
 });
 
 document.addEventListener("keypress", function(event) {
-   playSound(event.key);
+   var eventKey = event.key
+   playSound(eventKey);
+   buttonAnimation(eventKey);
 });
 
 function playSound(key) {
@@ -53,4 +57,11 @@ function playSound(key) {
    }
 }
 
+function buttonAnimation(currentKey) {
+   var activeButton = document.querySelector("." + currentKey);
 
+   activeButton.classList.add("pressed");
+   setTimeout(() => {
+      activeButton.classList.remove("pressed");
+   }, 100);
+}
